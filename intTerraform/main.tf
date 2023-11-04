@@ -53,7 +53,7 @@ resource "aws_ecs_task_definition" "aws-ecs-task" {
   memory                   = "1024"
   cpu                      = "512"
   execution_role_arn       = "arn:aws:iam::288906493057:role/ecsTaskExecutionRole"
-  task_role_arn            = "arn:aws:iam::156156311593:role/ecsTaskExecutionRole"
+  task_role_arn            = "arn:aws:iam::288906493057:role/ecsTaskExecutionRole"
 
 }
 
