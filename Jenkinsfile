@@ -30,7 +30,7 @@ pipeline {
       stage ('Build') {
       agent { label 'awsDeploy2' }
       steps {
-          sh 'docker build -t kevingonzalez/bankapp .'
+          sh 'docker build -t kevingonzalez7997/bankapp .'
     }
 }
     
@@ -44,7 +44,7 @@ pipeline {
      stage ('Push') {
       agent { label 'awsDeploy2' }
         steps {
-            sh 'docker push kevingonzalez/bankapp'
+            sh 'docker push kevingonzalez7997/bankapp'
   }
      }
 
