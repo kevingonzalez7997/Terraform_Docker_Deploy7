@@ -78,7 +78,7 @@ resource "aws_ecs_service" "aws-ecs-service" {
 
   load_balancer {
     target_group_arn = aws_lb_target_group.bank-app.arn
-    container_name   = "bankapp-d7-container"
+    container_name   = "bankapp-container-d7"
     container_port   = 8000
   }
 
