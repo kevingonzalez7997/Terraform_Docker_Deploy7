@@ -4,7 +4,7 @@ pipeline {
       DOCKERHUB_CREDENTIALS = credentials('kevingonzalez7997-dockerhub')
       }
    stages {
-  
+     
     stage ('Test') {
       steps {
         sh '''#!/bin/bash
@@ -25,12 +25,12 @@ pipeline {
        
       }
    }
-      stage ('Build') {
+     
+    stage ('Build') {
       steps {
           sh 'docker build -t kevingonzalez7997/bankingapp .'
     }
 }
-    
      stage ('Login') {
         steps {
           sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
@@ -76,19 +76,5 @@ pipeline {
          }
     }
    }
- }
+  }
 }
-//  stage('Destroy') {
-//     agent {label 'awsDeploy'}
-//     steps {
-//           withCredentials([string(credentialsId: 'AWS_ACCESS_KEY', variable: 'aws_access_key'),
-//               string(credentialsId: 'AWS_SECRET_KEY', variable: 'aws_secret_key')]) {
-//                 dir('intTerraform') {
-//                     sh 'terraform destroy -auto-approve -var="aws_access_key=$aws_access_key" -var="aws_secret_key=$aws_secret_key"'
-//                   }
-//           }
-//     }
-// }
-
-//   }
-// }
