@@ -5,12 +5,7 @@ pipeline {
       }
    stages {
 
-    stage ('Build') {
-      agent { label 'awsDeploy2' }
-      steps {
-          sh 'docker build -t kevingonzalez/bankapp .'
-    }
-}
+   
      
     stage ('Test') {
       steps {
@@ -32,7 +27,12 @@ pipeline {
        
       }
    }
-     
+      stage ('Build') {
+      agent { label 'awsDeploy2' }
+      steps {
+          sh 'docker build -t kevingonzalez/bankapp .'
+    }
+}
     
      stage ('Login') {
       agent { label 'awsDeploy2' }
