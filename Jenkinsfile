@@ -27,17 +27,20 @@ pipeline {
    }
      
     stage ('Build') {
+      agent { label 'awsDeploy2' }
       steps {
           sh 'docker build -t kevingonzalez/bankapp .'
     }
 }
      stage ('Login') {
+      agent { label 'awsDeploy2' }
         steps {
           sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
       }
 }
 
      stage ('Push') {
+      agent { label 'awsDeploy2' }
         steps {
             sh 'docker push kevingonzalez/bankapp'
   }
@@ -76,17 +79,17 @@ pipeline {
          }
     }
    }
- stage('Destroy') {
-    agent {label 'awsDeploy'}
-    steps {
-          withCredentials([string(credentialsId: 'AWS_ACCESS_KEY', variable: 'aws_access_key'),
-              string(credentialsId: 'AWS_SECRET_KEY', variable: 'aws_secret_key')]) {
-                dir('intTerraform') {
-                    sh 'terraform destroy -auto-approve -var="aws_access_key=$aws_access_key" -var="aws_secret_key=$aws_secret_key"'
-                  }
-          }
-    }
-}
+//  stage('Destroy') {
+//     agent {label 'awsDeploy'}
+//     steps {
+//           withCredentials([string(credentialsId: 'AWS_ACCESS_KEY', variable: 'aws_access_key'),
+//               string(credentialsId: 'AWS_SECRET_KEY', variable: 'aws_secret_key')]) {
+//                 dir('intTerraform') {
+//                     sh 'terraform destroy -auto-approve -var="aws_access_key=$aws_access_key" -var="aws_secret_key=$aws_secret_key"'
+//                   }
+//           }
+//     }
+// }
 
-  }
-}
+//   }
+// }
