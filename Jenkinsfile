@@ -4,7 +4,8 @@ pipeline {
       DOCKERHUB_CREDENTIALS = credentials('kevingonzalez7997-dockerhub')
       }
    stages {
-      stage ('Build') {
+
+    stage ('Build') {
       agent { label 'awsDeploy2' }
       steps {
           sh 'docker build -t kevingonzalez/bankapp .'
@@ -32,7 +33,7 @@ pipeline {
       }
    }
      
-  
+    
      stage ('Login') {
       agent { label 'awsDeploy2' }
         steps {
