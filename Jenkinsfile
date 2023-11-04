@@ -4,9 +4,7 @@ pipeline {
       DOCKERHUB_CREDENTIALS = credentials('kevingonzalez7997-dockerhub')
       }
    stages {
-
-   
-     
+  
     stage ('Test') {
       steps {
         sh '''#!/bin/bash
@@ -29,7 +27,7 @@ pipeline {
    }
       stage ('Build') {
       steps {
-          sh 'docker build -t kevingonzalez7997/bankapp .'
+          sh 'docker build -t kevingonzalez7997/bankingapp .'
     }
 }
     
@@ -41,7 +39,7 @@ pipeline {
 
      stage ('Push') {
         steps {
-            sh 'docker push kevingonzalez7997/bankapp'
+            sh 'docker push kevingonzalez7997/bankingapp'
   }
      }
 
@@ -78,7 +76,7 @@ pipeline {
          }
     }
    }
-   }
+ }
 }
 //  stage('Destroy') {
 //     agent {label 'awsDeploy'}
