@@ -65,14 +65,14 @@ For Docker Hub:
 ## Dockerfile
 Creating Docker images with Dockerfiles offers a consistent way to package and distribute applications. This approach ensures applications run consistently across different environments, mitigating configuration drift.
 
-The Dockerfile is created to build an image of the application. This step follows the testing stage on the `docker_node` EC2 and involves building and pushing the image to Docker Hub, a cloud-based service that hosts Docker images. This is possible due to the creation of Jenkins credentials.
+The [Dockerfile](dockerfile) is created to build an image of the application. This step follows the testing stage on the `docker_node` EC2 and involves building and pushing the image to Docker Hub, a cloud-based service that hosts Docker images. This is possible due to the creation of Jenkins credentials.
 
 ## Application Infrastructure Resources
 These resources are defined across three distinct .tf (Terraform) files, each serving a specific role in creating the environment for the application:
 
 ### vpc.tf
 
-The `vpc.tf` file is the backbone of the infrastructure, creating a comprehensive network environment for the application. It includes the following components:
+The `vpc.tf` file is the infrastructure, creating a comprehensive network environment for the application. It includes the following components:
 
 - **Virtual Private Cloud (VPC)**: The networking framework that manages resources.
 - **Availability Zones (2 AZs)**: Providing redundancy and fault tolerance by distributing resources across different AZs.
