@@ -138,6 +138,9 @@ While the current infrastructure is robust and secure, there are opportunities f
 
 **Auto-Scaling**: Implement auto-scaling to dynamically adjust the number of container instances based on traffic patterns. Auto-scaling ensures the application's performance even during traffic spikes.
 
+**Enhance Fault Tolerance**: To mitigate the single point of failure associated with the current single NAT gateway, implement a second NAT gateway in AZ 1b. This approach increases redundancy and reduces the risk of downtime if one of the NAT gateways becomes unavailable.
+
+**Geographical Redundancy**: Duplicating the entire infrastructure in a different AWS region would further increase resilience. This provides a failover in case a whole region experiences an outage, ensuring continued availability of the application.
 
 ## Conclusion 
 
