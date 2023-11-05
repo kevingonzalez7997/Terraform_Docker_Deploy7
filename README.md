@@ -134,8 +134,6 @@ Terraform performs a planning phase to analyze and determine the resources neede
 The apply phase executes the provisioning tasks based on the plan stage. It basically uses magic to create the application infrastructure. Terraform returns a detailed summary of what resources have been successfully created.
 
 ## Optimization
-While the current infrastructure is robust and secure, there are opportunities for optimization :
-
 **Auto-Scaling**: Implement auto-scaling to dynamically adjust the number of container instances based on traffic patterns. Auto-scaling ensures the application's performance even during traffic spikes.
 
 **Enhance Fault Tolerance**: To mitigate the single point of failure associated with the current single NAT gateway, implement a second NAT gateway in AZ 1b. This approach increases redundancy and reduces the risk of downtime if one of the NAT gateways becomes unavailable.
@@ -143,7 +141,6 @@ While the current infrastructure is robust and secure, there are opportunities f
 **Geographical Redundancy**: Duplicating the entire infrastructure in a different AWS region would further increase resilience. This provides a failover in case a whole region experiences an outage, ensuring continued availability of the application.
 
 ## Conclusion 
-
 The banking application deployment on the AWS network leverages Terraform and Jenkins to establish a fault-tolerant and secure infrastructure. Terraform's configuration settings ensure that when a container instance shuts down, another is created, guaranteeing uninterrupted service. The use of private subnets, along with DNS instead of public IP addresses and port numbers, enhances security and reduces vulnerabilities. 
 
 In this infrastructure, there is strong fault tolerance. When one container instance is terminated, the architecture automatically promotes the creation of another to ensure the continuity of services. This redundancy is achieved through Terraform's configuration settings under the '# ECS Service' section, where 'desired_count' is set to 2 and 'force_new_deployment' is enabled. The 'scheduling_strategy' is set to 'REPLICA,' ensuring that replica containers are spun up to maintain 2 running at all times. The containers are deployed within the private subnets, enhancing the overall security. In addition, public IP addresses and port numbers are not exposed; instead, a DNS-based approach is applied. 
