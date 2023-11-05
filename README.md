@@ -36,8 +36,8 @@ Scripts have been prepared to install the necessary files on each of these insta
 ## Jenkins Setup
 Jenkins, an open-source automation server, plays a central role in building, testing, and deploying code while efficiently distributing workloads. In this setup, the nodes are allocated specific responsibilities:
 
-- **Docker Node**: This node performs tasks like testing the application, building the Docker image, and pushing it to Docker Hub.
-- **Terraform Node**: This node focuses on creating the entire application infrastructure.
+- **Docker Node**: Performs tasks such as testing the application, building the Docker image, and pushing it to Docker Hub.
+- **Terraform Node**: Focuses on creating the entire application infrastructure.
 
 To complete these tasks, two new nodes are created:
 
