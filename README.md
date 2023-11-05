@@ -6,7 +6,7 @@
 - [Purpose](#purpose)
 - [Infrastructure Diagram](#infrastructure-diagram)
 - [Git Branch and Git Push](#git-branch-and-git-push)
-- [Jenkins Infrastructure (main.tf)](#jenkins-infrastructure-maintf)
+- [Jenkins Infrastructure (ec2.tf)](#jenkins-infrastructure-ec2tf)
 - [Jenkins Setup](#jenkins-setup)
 - [Credentials for Jenkins](#credentials-for-jenkins)
 - [Dockerfile](#dockerfile)
@@ -20,10 +20,10 @@ The goal of this deployment is to launch a banking application within the AWS ne
 ![Infrastructure Diagram](link_to_diagram_image)
 
 ## Git Branch and Git Push
-Create a branch as a staging environment for all changes. It's essential to reference the database in every aspect of the application that interacts with it, including the username, password, and endpoint. VSCode was used to visually aid the Git processes.
+Create a branch as a staging environment for all changes. It's essential to reference the database in every aspect of the application that interacts with it, including the username, password, and endpoint. VSCode was used to visually aid the [Git](https://github.com/kevingonzalez7997/Git_Cloning.git) processes.
 
-## Jenkins Infrastructure (main.tf)
-The infrastructure for Jenkins is defined in the `main.tf` file. This infrastructure consists of three EC2 instances:
+## Jenkins Infrastructure (ec2.tf)
+The infrastructure for Jenkins is defined in the [ec2.tf](Jenkins_files/ec2.tf) file. This infrastructure consists of three EC2 instances:
 
 1. **Jenkins Manager**: This instance is responsible for managing and controlling the other nodes.
 2. **Docker Node**: This node is equipped for tasks such as testing the application, building the Docker image, and pushing the image to Docker Hub.
@@ -45,8 +45,8 @@ To complete these tasks, two new nodes are created:
 4. Create credentials by entering the private key directly.
 5. Save and check the agent's status in the log.
 
-In addition two plugs-in are also installed :
-Docker pipeline
+In addition, two plugs-in are also installed :
+Docker Pipeline
 Pipeline keep running
 
 ## Credentials for Jenkins
@@ -114,7 +114,7 @@ GitHub is one of the most popular open-source repository platforms. The code wil
 ### Test Stage (docker_node)
 In this stage, the application is tested on the `docker_node` EC2 instance. Any errors are identified and addressed during this phase.
 ### Build Stage (docker_node)
-Build stage focuses on building the Docker image. The Dockerfile is used to create a container image that encapsulates the application and its dependencies. This image serves as a consistent package for the application.
+The build stage focuses on building the Docker image. The Dockerfile is used to create a container image that encapsulates the application and its dependencies. This image serves as a consistent package for the application.
 
 ### Login to Docker Hub (docker_node)
 After the image is built, it will get pushed by logging into Docker Hub. This is made possible through credentials installed on Jenkins, allowing for secure interactions with the Docker Hub service.
