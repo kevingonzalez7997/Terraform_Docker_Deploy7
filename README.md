@@ -19,7 +19,7 @@
 The goal of this deployment is to launch a banking application within the AWS network, leveraging Terraform and Jenkins to automate infrastructure provisioning. The application's source code is cloned from GitHub using Git, and the application's image is created using a Dockerfile. The image is then later used with a container to host the app.
 
 ## Infrastructure Diagram
-![Infrastructure Diagram](link_to_diagram_image)
+![Infrastructure Diagram](D7V1.png)
 
 ## Git Branch and Git Push
 Create a branch as a staging environment for all changes. It's essential to reference the database in every aspect of the application that interacts with it, including the username, password, and endpoint. VSCode was used to visually aid the [Git](https://github.com/kevingonzalez7997/Git_Cloning.git) processes.
