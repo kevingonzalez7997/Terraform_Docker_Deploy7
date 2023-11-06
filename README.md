@@ -22,8 +22,11 @@ The goal of this deployment is to launch a banking application within the AWS ne
 ![Infrastructure Diagram](D7V1.png)
 
 ## Git Branch and Git Push
-Create a branch as a staging environment for all changes. It's essential to reference the database in every aspect of the application that interacts with it, including the username, password, and endpoint. VSCode was used to visually aid the [Git](https://github.com/kevingonzalez7997/Git_Cloning.git) processes.
+Create a branch as a staging environment for all changes.VSCode was used to visually aid the [Git](https://github.com/kevingonzalez7997/Git_Cloning.git) processes. 
+It's essential to reference the database in every aspect of the application that interacts with it, including the username, password, and endpoint. 
 
+## RDS 
+Amazon Relational Database Service (Amazon RDS) is a managed web service that makes it easier to set up, operate, and scale a relational database in the AWS Cloud. 
 ## Jenkins Infrastructure (ec2.tf)
 The infrastructure for Jenkins is defined in the [ec2.tf](Jenkins_files/ec2.tf) file. This infrastructure consists of three EC2 instances:
 
@@ -78,27 +81,27 @@ The `vpc.tf` file is the infrastructure, creating a comprehensive network enviro
 
 - **Virtual Private Cloud (VPC)**: The networking framework that manages resources.
 - **Availability Zones (2 AZs)**: Providing redundancy and fault tolerance by distributing resources across different AZs.
-- **2 Public Subnets**
+- **2 Public Subnets** :  
 - **2 Private Subnets**: Subnets isolated from the public internet, for sensitive data
-- **NAT Gateway**: A network gateway for outbound traffic from private subnets to the internet.
+- **NAT Gateway**: A network gateway for egress traffic from private subnets to the internet.
 - **2 Route Tables**: Routing rules for traffic between subnets.
-- **2 Security Groups**
+- **2 Security Groups** : 80 for ALB and 8000 for container
 
 ### main.tf
 
 The `main.tf` file creates the environment for the application. It includes:
 
 - **Cluster**: The container for application tasks.
-- **Task Definition**: Configuration specifying how application containers work together.
-- **Service**: Ensures the desired number of tasks are running.
-- **Connection to Load Balancer**: Establishes a connection to the application load balancer, ensuring proper traffic distribution and high availability.
+- **Task Definition**: Configuration specifying how application containers will be created and from which image
+- **Service**: Ensures the desired number of tasks to be running at all times
+- **Connection to Load Balancer**: Establishes a connection to the application load balancer, ensuring proper traffic distribution and high availability as well as ingress traffic
 
 ### alb.tf
 
 The `alb.tf` file focuses on configuring the Application Load Balancer (ALB) and its related components. It includes:
 
-- **Target Group**: Manages the destination for load balancer traffic, ensuring that traffic is correctly routed to the application environment. It specifies the port used for communication.
-- **ALB (Application Load Balancer)**: Serves as the entry point for incoming requests, balancing traffic among application instances.
+- **Target Group**: Manages the destination for load balancer traffic, ensuring that traffic is correctly routed to the application environment. Port 8000 is the application ingress route.
+- **ALB (Application Load Balancer)**: Serves as the entry point for incoming requests, balancing traffic among application instances, in private subnets.
 - **Listener and Routing Rule**: Configures a listener on port 80, with rules that forward traffic to the appropriate target group, ensuring proper distribution of incoming requests.
 
 ## Jenkins Pipeline
