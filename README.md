@@ -13,6 +13,7 @@
 - [Dockerfile](#dockerfile)
 - [Application Infrastructure Resources](#application-infrastructure-resources)
 - [Jenkins Pipeline](#jenkins-pipeline)
+- [Troubleshooting](#troubleshooting)
 - [Optimization](#optimization)
 - [Conclusion](#conclusion)
 
@@ -26,7 +27,7 @@ The goal of this deployment is to launch a banking application within the AWS ne
 Git is a commonly used command-line tool that helps developers track changes in their codebase. Git allows you to create and manage repositories that store the history of your project, including all the changes made to it over time. VSCode was used to visually aid the [Git](https://github.com/kevingonzalez7997/Git_Cloning.git) processes. 
 
 ## RDS 
-Amazon Relational Database Service (Amazon RDS) is a managed web service that makes it easier to set up, operate, and scale a relational database in the AWS Cloud. It is referenced to the application to ensure continuity of user data across tasks. It's essential to [reference](https://github.com/kevingonzalez7997/Automate_Terraform_with_Jenkins_D6/blob/East/format.png) the database in every aspect of the application that interacts with it, includ the username, password, and endpoint. 
+Amazon Relational Database Service (Amazon RDS) is a managed web service that makes it easier to set up, operate, and scale a relational database in the AWS Cloud. It is referenced to the application to ensure continuity of user data across tasks. It's essential to [reference](https://github.com/kevingonzalez7997/Automate_Terraform_with_Jenkins_D6/blob/East/format.png) the database in every aspect of the application that interacts with it, including the username, password, and endpoint. 
 
 ## Jenkins Infrastructure (ec2.tf)
 The infrastructure for Jenkins is defined in the [ec2.tf](Jenkins_files/ec2.tf) file. This infrastructure consists of three EC2 instances:
@@ -136,6 +137,12 @@ Terraform performs a planning phase to analyze and determine the resources neede
 
 ### Apply (terraform_node)
 The apply phase executes the provisioning tasks based on the plan stage. It basically uses magic to create the application infrastructure. Terraform returns a detailed summary of what resources have been successfully created.
+
+## Troubleshooting
+
+The Jenkins pipeline is structured into 8 steps, with workload divided between two nodes, assisting with issue isolation. The initial four steps on the docker_node can be categorized into two groups: Group 1, which includes the "Test" and "Build" stages, relies on the node’s dependencies. Group 2, "Login" and "Push", depends on Jenkins credentials configured to access Docker Hub. 
+
+The remaining steps run on the `terraform_node`."Initialize" sets up the groundwork for Terraform, "Plan" analyzes the infrastructure provisioning requirements, and "Apply" executes the provisioning tasks. These steps depend on the nodes' dependencies, Terraform syntax, and AWS credentials.
 
 ## Optimization
 **Auto-Scaling**: Implement auto-scaling to dynamically adjust the number of container instances based on traffic patterns. Auto-scaling ensures the application's performance even during traffic spikes.
