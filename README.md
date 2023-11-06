@@ -6,6 +6,7 @@
 - [Purpose](#purpose)
 - [Infrastructure Diagram](#infrastructure-diagram)
 - [Git Branch and Git Push](#git-branch-and-git-push)
+- [RDS](#rds)
 - [Jenkins Infrastructure (ec2.tf)](#jenkins-infrastructure-ec2tf)
 - [Jenkins Setup](#jenkins-setup)
 - [Credentials for Jenkins](#credentials-for-jenkins)
@@ -112,7 +113,7 @@ GitHub is one of the most popular open-source repository platforms. The code wil
 - Configure Jenkins Credentials Provider as needed.
 - Copy and import the Repository URL where the application source code resides.
 - Use your GitHub username and the generated key from GitHub as your credentials.
-- Run [Build]().
+- Run ![Build](Jenkins-cicd.png).
 
 ### Pipeline Steps
 
