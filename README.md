@@ -22,11 +22,11 @@ The goal of this deployment is to launch a banking application within the AWS ne
 ![Infrastructure Diagram](D7v2.png)
 
 ## Git Branch and Git Push
-Create a branch as a staging environment for all changes.VSCode was used to visually aid the [Git](https://github.com/kevingonzalez7997/Git_Cloning.git) processes. 
-It's essential to reference the database in every aspect of the application that interacts with it, including the username, password, and endpoint. 
+Git is a commonly used command-line tool that helps developers track changes in their codebase. Git allows you to create and manage repositories that store the history of your project, including all the changes made to it over time. VSCode was used to visually aid the [Git](https://github.com/kevingonzalez7997/Git_Cloning.git) processes. 
 
 ## RDS 
-Amazon Relational Database Service (Amazon RDS) is a managed web service that makes it easier to set up, operate, and scale a relational database in the AWS Cloud. 
+Amazon Relational Database Service (Amazon RDS) is a managed web service that makes it easier to set up, operate, and scale a relational database in the AWS Cloud. It is referenced to the application to ensure continuity of user data across tasks. It's essential to [reference](https://github.com/kevingonzalez7997/Automate_Terraform_with_Jenkins_D6/blob/East/format.png) the database in every aspect of the application that interacts with it, includ the username, password, and endpoint. 
+
 ## Jenkins Infrastructure (ec2.tf)
 The infrastructure for Jenkins is defined in the [ec2.tf](Jenkins_files/ec2.tf) file. This infrastructure consists of three EC2 instances:
 
@@ -34,7 +34,7 @@ The infrastructure for Jenkins is defined in the [ec2.tf](Jenkins_files/ec2.tf) 
 2. **Docker Node**: This node is equipped for tasks such as testing the application, building the Docker image, and pushing the image to Docker Hub.
 3. **Terraform Node**: This node handles the provisioning of the entire application infrastructure.
 
-Scripts have been prepared to install the necessary files on each of these instances.
+[Scripts](Jenkins_files) have been prepared to install the necessary files on each instance.
 
 ## Jenkins Setup
 Jenkins, an open-source automation server, plays a central role in building, testing, and deploying code while efficiently distributing workloads. In this setup, the nodes are allocated specific responsibilities:
@@ -46,7 +46,7 @@ To complete these tasks, two new nodes are created:
 
 1. Specify the name and location.
 2. Select "Launch agent via SSH" and utilize the previously generated SSH key for secure communication.
-3. Specify the public IP of the 'docker_node' and 'jenkins_node' EC2 instances as the host.
+3. Specify the public IP of the 'docker_node' and 'Jenkins_node' EC2 instances as the host.
 4. Create credentials by entering the private key directly.
 5. Save and check the agent's status in the log.
 
@@ -77,7 +77,7 @@ These resources are defined across three distinct .tf (Terraform) files, each se
 
 ### vpc.tf
 
-The `vpc.tf` file is the infrastructure, creating a comprehensive network environment for the application. It includes the following components:
+The [vpc.tf](intTerraform/vpc.tf) file is the infrastructure, creating a comprehensive network environment for the application. It includes the following components:
 
 - **Virtual Private Cloud (VPC)**: The networking framework that manages resources.
 - **Availability Zones (2 AZs)**: Providing redundancy and fault tolerance by distributing resources across different AZs.
@@ -85,11 +85,11 @@ The `vpc.tf` file is the infrastructure, creating a comprehensive network enviro
 - **2 Private Subnets**: Subnets isolated from the public internet, for sensitive data
 - **NAT Gateway**: A network gateway for egress traffic from private subnets to the internet.
 - **2 Route Tables**: Routing rules for traffic between subnets.
-- **2 Security Groups** : 80 for ALB and 8000 for container
+- **2 Security Groups**: 80 for ALB and 8000 for container
 
 ### main.tf
 
-The `main.tf` file creates the environment for the application. It includes:
+The [main.tf](intTerraform/main.tf) file creates the environment for the application. It includes:
 
 - **Cluster**: The container for application tasks.
 - **Task Definition**: Configuration specifying how application containers will be created and from which image
@@ -98,7 +98,7 @@ The `main.tf` file creates the environment for the application. It includes:
 
 ### alb.tf
 
-The `alb.tf` file focuses on configuring the Application Load Balancer (ALB) and its related components. It includes:
+The [alb.tf](intTerraform/ALB.tf) file focuses on configuring the Application Load Balancer (ALB) and its related components. It includes:
 
 - **Target Group**: Manages the destination for load balancer traffic, ensuring that traffic is correctly routed to the application environment. Port 8000 is the application ingress route.
 - **ALB (Application Load Balancer)**: Serves as the entry point for incoming requests, balancing traffic among application instances, in private subnets.
