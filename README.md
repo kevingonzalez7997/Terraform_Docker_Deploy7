@@ -113,7 +113,7 @@ GitHub is one of the most popular open-source repository platforms. The code wil
 - Configure Jenkins Credentials Provider as needed.
 - Copy and import the Repository URL where the application source code resides.
 - Use your GitHub username and the generated key from GitHub as your credentials.
-- Run ![Build](Jenkins-cicd.png).
+- Run ![Build](Jenkins-cicd.png)
 
 ### Pipeline Steps
 
